@@ -1,5 +1,5 @@
 # Checkers-AI
-
+  
 ## About
 [Checkers](https://en.wikipedia.org/wiki/Draughts) playing agent implemented in Java. The agent uses the Minimax algorithm with [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning). 
 
