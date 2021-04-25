@@ -144,7 +144,8 @@ public class Game {
             case "4": depth = 9;break;
         }
 
-        AI miniMax = new AI(depth);
+//        AI miniMax = new AI(depth);
+        CutOffSearchAgent miniMax = new CutOffSearchAgent(depth);
         System.out.println("Player color: "+"2");
         System.out.println("AI color: "+"1");
         System.out.println("Player King: "+"4");

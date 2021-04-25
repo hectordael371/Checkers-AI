@@ -425,6 +425,10 @@ public class Board {
 //        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }
+    double evaluation(){
+//        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
+        return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
+    }
 
     int getWinner(){
         System.out.println("Light(Player) Pieces: "+Integer.toString(getCountLightPieces())+","
