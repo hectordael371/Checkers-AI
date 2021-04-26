@@ -49,6 +49,23 @@ public class AlphaBetaPruningAgent {
     }
 
     private double maxValue(Board state, int depth, double alpha, double beta) {
-        return 0;
+        //Check for Terminal condition. If met, return heuristic evaluation value.
+        if(depth == 0 || state.isGameOver())
+            return state.heuristic();
+
+        double value = Double.NEGATIVE_INFINITY;
+        for(Move action: state.getLegalMoves()){
+            Board nextState = new Board(state);
+            nextState.performMove(action);
+
+            value = Math.max(value, minValue(nextState, depth-1, alpha, beta));
+            if(value >= beta)
+                // Prune Alpha
+                return value;
+
+            alpha = Math.max(alpha, value);
+        }
+
+        return value;
     }
 }
