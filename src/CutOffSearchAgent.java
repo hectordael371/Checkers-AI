@@ -60,9 +60,6 @@ public class CutOffSearchAgent {
                     alpha,
                     beta
             ));
-            if(value <= alpha)
-                return value;
-            beta = Math.min(beta, value);
         }
         return value;
     }
@@ -81,9 +78,6 @@ public class CutOffSearchAgent {
                     alpha,
                     beta
             ));
-            if(value >= beta)
-                return value;
-            alpha = Math.max(alpha, value);
         }
         return value;
     }
