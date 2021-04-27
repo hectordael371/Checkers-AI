@@ -26,58 +26,69 @@ public class CutOffSearchAgent {
         return state;
     }
 
+    private boolean cutOffTest(Board state, int depth) {
+        if(depth <= this.cutOff || state.isGameOver())
+            return true;
+
+        return false;
+    }
+
+    private double eval(Board state) {
+        return state.eval();
+    }
+
+    private ArrayList<Move> actions(Board state) {
+        return state.getLegalMoves();
+    }
+
+    private Board result(Board state, Move action) {
+        state.performMove(action);
+        return state;
+    }
+
     private Move makeDecision(Board state){
-        double resultValue = Double.NEGATIVE_INFINITY;
-        int player = 1;
+        double resultVal = Double.NEGATIVE_INFINITY;
         Move result = new Move();
-        ArrayList<Move> actions = state.getLegalMoves();
-        for(Move action: actions){
-            Board nextState =  new Board(state);
-            nextState.performMove(action);
-            double value = minValue(nextState, depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY );  //changed
-//            nextState.displayBoard();
-            if (value > resultValue) {  //changed
+
+        for(Move action: actions(state)){
+            Board nextState = new Board(state);
+
+            double value = minValue(result(nextState, action), depth);
+
+            if(value > resultVal) {
                 result = action;
-                resultValue = value;
+                resultVal = value;
             }
         }
-        System.out.println("Heuristic val(AI is winning if +ve): "+Double.toString(resultValue));
+        System.out.println("Evaluation value is: " + Double.toString(resultVal));
         return result;
 
     }
 
-    private double minValue(Board state, int depth, double alpha, double beta) {
-        if(depth <= this.cutOff) {
-            return state.evaluation(); //change
+    private double minValue(Board state, int depth) {
+        if(cutOffTest(state, depth)){
+            return eval(state); //change
         }
         double value = Double.POSITIVE_INFINITY;
-        for(Move action: state.getLegalMoves()){
-            Board nextState =  new Board(state);
-            nextState.performMove(action);
-            value = Math.min(value, maxValue(
-                    nextState,
-                    depth-1,
-                    alpha,
-                    beta
-            ));
+        for(Move action: actions(state)) {
+            Board nextState = new Board(state);
+
+            value = Math.min(value,
+                    maxValue(result(nextState, action), depth - 1));
         }
         return value;
     }
 
-    private double maxValue(Board state, int depth, double alpha, double beta) {
-        if(depth <= this.cutOff) {
-            return state.evaluation(); //change
+    private double maxValue(Board state, int depth) {
+        if(cutOffTest(state, depth)){
+            return eval(state); //change
         }
         double value = Double.NEGATIVE_INFINITY;
-        for(Move action: state.getLegalMoves()){
-            Board nextState =  new Board(state);
-            nextState.performMove(action);
-            value = Math.max(value, minValue(
-                    nextState,
-                    depth-1,
-                    alpha,
-                    beta
-            ));
+        for(Move action: actions(state)) {
+            Board nextState = new Board(state);
+
+            value = Math.max(value,
+                    minValue(result(nextState, action), depth - 1));
         }
         return value;
     }

@@ -425,7 +425,7 @@ public class Board {
 //        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }
-    double evaluation(){
+    double eval(){
 //        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }
