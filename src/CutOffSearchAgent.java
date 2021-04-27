@@ -10,7 +10,7 @@ public class CutOffSearchAgent {
     public CutOffSearchAgent(int depth){
         this.depth = depth;
         this.player = 1;
-        this.cutOff = 5;
+        this.cutOff = 3;
     }
 
     public CutOffSearchAgent(int depth, int player, int cutOff){

@@ -426,7 +426,10 @@ public class Board {
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }
     double eval(){
-        return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
+//        System.out.println("Eval val 2:" +getCountLightPieces()+","+getCountDarkPieces()+","+getCountLightKings()+","+getCountDarkKings());
+//        System.out.println(-getCountLightPieces() + getCountDarkPieces() - (getCountLightKings()*0.5 - getCountDarkKings()*0.5));
+
+        return -getCountLightPieces() + getCountDarkPieces() - (getCountLightKings()*0.5 - getCountDarkKings()*0.5);
     }
 
     int getWinner(){
