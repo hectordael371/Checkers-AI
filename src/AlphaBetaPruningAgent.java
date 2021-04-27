@@ -24,7 +24,22 @@ public class AlphaBetaPruningAgent {
     }
 
     private Move makeDecision(Board state){
-        return null;
+        double resultVal = Double.NEGATIVE_INFINITY;
+        Move result = new Move();
+        ArrayList<Move> actions = state.getLegalMoves();
+
+        for(Move action: actions){
+            Board nextState = new Board(state);
+            nextState.performMove(action);
+
+            double value = minValue(nextState, depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+            if(value > resultVal) {
+                result = action;
+                resultVal = value;
+            }
+        }
+        System.out.println("Heuristic value is: " + Double.toString(resultVal));
+        return result;
     }
 
     private double minValue(Board state, int depth, double alpha, double beta) {
