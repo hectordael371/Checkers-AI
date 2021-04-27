@@ -12,7 +12,8 @@ public class Board {
     public int countLightPieces = 12, countDarkPieces = 12;
     int[][] board = new int[SIZE][SIZE];
 
-    int playerColor = 2;
+    // Light always plays first.
+    int playerColor = LIGHT;
 
     public Board(){
         for(int i = 0; i < SIZE; i++){

@@ -16,9 +16,9 @@ public class AlphaBetaSearchAgent {
     }
 
     public Board move(Board state){
-//        Move action =  miniMaxDecision(state);
         Move action = AlphaBetaSearch(state);
         System.out.println(action.printMove());
+
         state.performMove(action);
         return state;
     }
@@ -43,38 +43,33 @@ public class AlphaBetaSearchAgent {
         return state;
     }
 
-    private Move miniMaxDecision(Board state){
-        double resultVal = Double.NEGATIVE_INFINITY;
+    private Move AlphaBetaSearch(Board state){
+        double resultVal = player == 1 ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
         Move result = new Move();
 
         for(Move action: actions(state)){
             Board nextState = new Board(state);
 
-            double value = minValue(result(nextState, action),
-                    depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+            double value = 0;
+            if(player == 1) {
+                value = maxValue(result(nextState, action),
+                        depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
-            if(value > resultVal) {
-                result = action;
-                resultVal = value;
+                if(value >= resultVal) {
+                    result = action;
+                    resultVal = value;
+                }
+            } else {
+                value = minValue(result(nextState, action),
+                        depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+
+                if(value <= resultVal) {
+                    result = action;
+                    resultVal = value;
+                }
             }
         }
         System.out.println("Heuristic value is: " + Double.toString(resultVal));
-        return result;
-    }
-
-    private Move AlphaBetaSearch(Board state) {
-        Move result = new Move();
-        double target = maxValue(state, depth, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-
-        for(Move action: actions(state)) {
-            Board nextState = new Board(state);
-            double value = maxValue(result(nextState, action), depth, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
-
-            if(value == target)
-                return action;
-        }
-
-        System.out.println("No Move Found.");
         return result;
     }
 
