@@ -20,7 +20,7 @@ public class CutOffSearchAgent {
     }
 
     public Board move(Board state){
-        Move action =  makeDecision(state);
+        Move action =  miniMaxDecision(state);
         System.out.println(action.printMove());
         state.performMove(action);
         return state;
@@ -46,7 +46,7 @@ public class CutOffSearchAgent {
         return state;
     }
 
-    private Move makeDecision(Board state){
+    private Move miniMaxDecision(Board state){
         double resultVal = Double.NEGATIVE_INFINITY;
         Move result = new Move();
 
