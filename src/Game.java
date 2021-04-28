@@ -155,19 +155,16 @@ public class Game {
                 break;
         }
 
-        AlphaBetaSearchAgent agent1 = new AlphaBetaSearchAgent(depth, 1);
-        AlphaBetaSearchAgent agent2 = new AlphaBetaSearchAgent(depth, 2);
+//        AlphaBetaSearchAgent agent = new AlphaBetaSearchAgent(depth);
+        CutOffSearchAgent agent = new CutOffSearchAgent(depth);
 
-        System.out.println("Agent 1 color: "+"1");
-        System.out.println("Agent 2 color: "+"2");
+        System.out.println("Player color: "+"1");
+        System.out.println("Agent color: "+"2");
 
-        System.out.println("Agent 1 King: "+"3");
-        System.out.println("Agent 2 King: "+"4");
+        System.out.println("Player King: "+"3");
+        System.out.println("Agent King: "+"4");
 
         while(true){
-
-//            int winner = board.getWinner();
-//            if (gameOver(board, winner)) break;
 
             ArrayList<Move> actions = board.getLegalMoves();
             HashMap<String, Move> notationToMove = new HashMap<>();
@@ -193,21 +190,10 @@ public class Game {
             board.performMove(notationToMove.get(notation));
             System.out.println("Player Played last...");
 
-            System.out.println("Agent 1 is thinking...");
-            agent1.move(board);
-            System.out.println("Agent 1 PLAYED LAST...");
+            System.out.println("Agent is thinking...");
+            agent.move(board);
+            System.out.println("Agent PLAYED LAST...");
             board.displayBoard();
-
-            //AI plays the move
-//            System.out.println("Agent 1 is thinking...");
-//            agent1.move(board);
-//            System.out.println("Agent 1 PLAYED LAST...");
-//            board.displayBoard();
-//
-//            System.out.println("Agent 2 is thinking...");
-//            agent2.move(board);
-//            System.out.println("Agent 2 PLAYED LAST...");
-//            board.displayBoard();
 
             //Check if the game is over!
             int winner = board.getWinner();
@@ -225,10 +211,10 @@ public class Game {
             board.displayBoard();
             System.out.println(winner);
             if(winner == 1){
-                System.out.println("Agent 1 WINS!");
+                System.out.println("Player wins!");
             }
             else if(winner == 2){
-                System.out.println("Agent 2 WINS!");
+                System.out.println("Agent wins!");
             }
             else{
                 System.out.println("Game drawn. No moves left!");

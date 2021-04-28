@@ -427,7 +427,6 @@ public class Board {
     }
 
     double evaluation(){
-//        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }
 

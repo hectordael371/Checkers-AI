@@ -17,7 +17,6 @@ public class AlphaBetaSearchAgent {
 
     public Board move(Board state){
         Move action = AlphaBetaSearch(state);
-//        Move action = makeDecision(state);
         System.out.println(action.printMove());
 
         state.performMove(action);
@@ -46,7 +45,6 @@ public class AlphaBetaSearchAgent {
 
     private Move AlphaBetaSearch(Board state){
         double resultVal = player == 1 ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
-//        double resultVal = Double.NEGATIVE_INFINITY;
         Move result = new Move();
 
         for(Move action: actions(state)){
