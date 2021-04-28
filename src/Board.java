@@ -12,8 +12,7 @@ public class Board {
     public int countLightPieces = 12, countDarkPieces = 12;
     int[][] board = new int[SIZE][SIZE];
 
-    // Light always plays first.
-    int playerColor = LIGHT;
+    int playerColor;
 
     public Board(){
         for(int i = 0; i < SIZE; i++){
@@ -33,6 +32,10 @@ public class Board {
                 else
                     board[i][j] = 0;
             }
+
+            //Light always plays first.
+            this.playerColor = LIGHT;
+
         }
         //Try Random end games for debuggin purposes.
         //        board[1][4] = DARK;
@@ -106,13 +109,14 @@ public class Board {
     }
 
     //Copy constructor to get board clone.
-    public Board(Board anotherBoard){
+    public Board(Board anotherBoard, int player){
         this.setBoard(anotherBoard.getBoard());
         this.setCountDarkKings(anotherBoard.getCountDarkKings());
         this.setCountLightKings(anotherBoard.getCountLightKings());
         this.setCountDarkPieces(anotherBoard.getCountDarkPieces());
         this.setCountLightPieces(anotherBoard.getCountLightPieces());
-        this.setPlayerColor(anotherBoard.getPlayerColor());
+//        this.setPlayerColor(anotherBoard.getPlayerColor());
+        this.setPlayerColor(player);
     }
     public void displayBoard() {
         for(int i = 0; i<8;i++){
@@ -422,7 +426,7 @@ public class Board {
         return;
     }
 
-    double heuristic(){
+    double evaluation(){
 //        System.out.println(countDarkKings+","+countDarkPieces+","+countLightKings+","+countDarkKings);
         return -countLightPieces + countDarkPieces - (countLightKings*0.5 - countDarkKings*0.5);
     }

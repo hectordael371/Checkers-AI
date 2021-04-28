@@ -168,41 +168,46 @@ public class Game {
 
 //            int winner = board.getWinner();
 //            if (gameOver(board, winner)) break;
-//
-//            ArrayList<Move> actions = board.getLegalMoves();
-//            HashMap<String, Move> notationToMove = new HashMap<>();
 
-//            System.out.println("Current Board");
-//            board.displayBoard();
-//            System.out.println("Available Moves: ");
-//            int actionIndex = 1;
-//            for(Move action: actions){
-//                System.out.println(Integer.toString(actionIndex)+ ": " + action.notation);
-//                notationToMove.put(Integer.toString(actionIndex), action);
-//                actionIndex += 1;
-//            }
-//
-//            System.out.println("Please choose move number:");
-//            String notation = scanner.nextLine();
-//
-//            while(!notationToMove.containsKey(notation)){
-//                System.out.println("Please enter a valid number!");
-//                notation = scanner.nextLine();
-//            }
-//
-//            board.performMove(notationToMove.get(notation));
-//            System.out.println("Player Played last...");
+            ArrayList<Move> actions = board.getLegalMoves();
+            HashMap<String, Move> notationToMove = new HashMap<>();
 
-            //AI plays the move
+            System.out.println("Current Board");
+            board.displayBoard();
+            System.out.println("Available Moves: ");
+            int actionIndex = 1;
+            for(Move action: actions){
+                System.out.println(Integer.toString(actionIndex)+ ": " + action.notation);
+                notationToMove.put(Integer.toString(actionIndex), action);
+                actionIndex += 1;
+            }
+
+            System.out.println("Please choose move number:");
+            String notation = scanner.nextLine();
+
+            while(!notationToMove.containsKey(notation)){
+                System.out.println("Please enter a valid number!");
+                notation = scanner.nextLine();
+            }
+
+            board.performMove(notationToMove.get(notation));
+            System.out.println("Player Played last...");
+
             System.out.println("Agent 1 is thinking...");
             agent1.move(board);
             System.out.println("Agent 1 PLAYED LAST...");
             board.displayBoard();
 
-            System.out.println("Agent 2 is thinking...");
-            agent2.move(board);
-            System.out.println("Agent 2 PLAYED LAST...");
-            board.displayBoard();
+            //AI plays the move
+//            System.out.println("Agent 1 is thinking...");
+//            agent1.move(board);
+//            System.out.println("Agent 1 PLAYED LAST...");
+//            board.displayBoard();
+//
+//            System.out.println("Agent 2 is thinking...");
+//            agent2.move(board);
+//            System.out.println("Agent 2 PLAYED LAST...");
+//            board.displayBoard();
 
             //Check if the game is over!
             int winner = board.getWinner();

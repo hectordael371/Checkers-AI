@@ -17,6 +17,7 @@ public class AlphaBetaSearchAgent {
 
     public Board move(Board state){
         Move action = AlphaBetaSearch(state);
+//        Move action = makeDecision(state);
         System.out.println(action.printMove());
 
         state.performMove(action);
@@ -31,7 +32,7 @@ public class AlphaBetaSearchAgent {
     }
 
     private double utility(Board state) {
-        return state.heuristic();
+        return state.evaluation();
     }
 
     private ArrayList<Move> actions(Board state) {
@@ -45,15 +46,16 @@ public class AlphaBetaSearchAgent {
 
     private Move AlphaBetaSearch(Board state){
         double resultVal = player == 1 ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
+//        double resultVal = Double.NEGATIVE_INFINITY;
         Move result = new Move();
 
         for(Move action: actions(state)){
-            Board nextState = new Board(state);
+            Board nextState = new Board(state, this.player);
 
             double value = 0;
             if(player == 1) {
                 value = maxValue(result(nextState, action),
-                        depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+                        depth, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 
                 if(value >= resultVal) {
                     result = action;
@@ -61,7 +63,7 @@ public class AlphaBetaSearchAgent {
                 }
             } else {
                 value = minValue(result(nextState, action),
-                        depth, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+                        depth, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 
                 if(value <= resultVal) {
                     result = action;
@@ -80,7 +82,7 @@ public class AlphaBetaSearchAgent {
 
         double value = Double.NEGATIVE_INFINITY;
         for(Move action: actions(state)){
-            Board nextState = new Board(state);
+            Board nextState = new Board(state, this.player);
 
             value = Math.max(value,
                     minValue(result(nextState, action),
@@ -102,7 +104,7 @@ public class AlphaBetaSearchAgent {
 
         double value = Double.POSITIVE_INFINITY;
         for(Move action: actions(state)){
-            Board nextState = new Board(state);
+            Board nextState = new Board(state, this.player);
 
             value = Math.min(value,
                     maxValue(result(nextState, action),
