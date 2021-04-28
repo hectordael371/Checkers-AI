@@ -144,7 +144,11 @@ public class Game {
             case "4": depth = 9;break;
         }
 
-        AI miniMax = new AI(depth);
+        // Uncomment the agent you would like to use
+
+        AlphaBetaSearch abAgent = new AlphaBetaSearchAgent(depth);
+        //CutOffSearchAgent cuAgent = new CutOffSearchAgent(depth);
+
         System.out.println("Player color: "+"2");
         System.out.println("AI color: "+"1");
         System.out.println("Player King: "+"4");
@@ -187,7 +191,8 @@ public class Game {
 
             //AI plays the move
             System.out.println("AI thinking...");
-            miniMax.move(board);
+            // change to the agent you are using
+            abAgent.move(board);
             System.out.println("AI PLAYED LAST...");
             board.displayBoard();
 
